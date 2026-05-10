@@ -24,8 +24,6 @@ function Login() {
   const [isLoding, setisLoding] = useState(false)
   let [ isError , setIsError] = useState( false )
   let [ isSucces , setIsSucces ] = useState()
-  let { userId , setUserId  } = useContext( cartContext )
-  // let { userId , setUserId  } = useContext( cartContext )
 
 
 
@@ -33,8 +31,7 @@ function Login() {
           Aos.init({ easing: 'ease-in-out', duration : 1500})
   } , [])
 
-  en = ""
-
+ 
 
   let myNavigate = useNavigate()
 

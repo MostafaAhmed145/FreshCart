@@ -18,6 +18,18 @@ export const addProductToCart = createAsyncThunk(
   }
 );
 
+
+export const getCart = createAsyncThunk(
+  "cart/getCart",
+  async () => {
+    const { data } = await axios.get(
+      "https://ecommerce.routemisr.com/api/v1/cart",
+      { headers: { token: localStorage.getItem("tkn") } }
+    );
+    return data;
+  }
+);
+
 export const removeCart = createAsyncThunk(
   "cartSlice/removeCart",
   async (id) => {
@@ -66,6 +78,14 @@ export const removeProductFromWishList = createAsyncThunk(
   }
 );
 
+export const clearAllProductInCart = createAsyncThunk("cartSlice/clearAllProductInCart" , async ()=>{
+    await axios.delete("https://ecommerce.routemisr.com/api/v1/cart" , {
+      headers : {
+        token: localStorage.getItem("tkn"),
+      }
+    })
+})
+
 // =================================
 // Slice
 // =================================
@@ -87,7 +107,8 @@ const cartSlice = createSlice({
   extraReducers: (builder) => {
     // Add Product
     builder.addCase(addProductToCart.pending, (state) => {
-      state.isLoading = true;
+      // state.isLoading = true;
+            state.isSuccess = false;
     });
     builder.addCase(addProductToCart.fulfilled, (state, action) => {
       state.isLoading = false;
@@ -103,9 +124,32 @@ const cartSlice = createSlice({
     });
 
 
+
+    builder.addCase(getCart.fulfilled, (state, action) => {
+      state.allProducts = action.payload.data.products;
+      state.totalCartPrice = action.payload.data.totalCartPrice;
+      state.isLoading = false;
+      state.isError = false
+    });
+
+    builder.addCase(getCart.pending , (state)=>{
+      state.isLoading = true;
+      state.isError = false
+    })
+
+    builder.addCase(getCart.rejected , (state)=>{
+      state.isLoading = false;
+      state.isError = true
+      toast.error("Error geting product cart", { duration: 1500 });
+    })
+
+
+
+
     // Remove Product
     builder.addCase(removeCart.pending, (state) => {
-      state.isLoading = true;
+      // state.isLoading = true;
+      state.isError = false
     });
     builder.addCase(removeCart.fulfilled, (state, action) => {
       state.isLoading = false;
@@ -122,7 +166,8 @@ const cartSlice = createSlice({
 
     // Update Product Count
     builder.addCase(updateCart.pending, (state) => {
-      state.isLoading = true;
+      // state.isLoading = true;
+            state.isError = false
     });
     builder.addCase(updateCart.fulfilled, (state, action) => {
       state.isLoading = false;
@@ -140,7 +185,8 @@ const cartSlice = createSlice({
 
     // Wishlist - Add
     builder.addCase(addProductInWishList.pending, (state) => {
-      state.isLoading = true;
+      // state.isLoading = true;
+            state.isError = false
     });
     builder.addCase(addProductInWishList.fulfilled, (state, action) => {
       state.isLoading = false;
@@ -164,6 +210,26 @@ const cartSlice = createSlice({
     builder.addCase(removeProductFromWishList.rejected, () => {
       toast.error("Error removing from wishlist", { duration: 1500 });
     });
+
+    builder.addCase(clearAllProductInCart.fulfilled , (state)=>{
+      state.isError = false ;
+      state.isLoading = false ;
+      state.totalCartPrice = 0
+      state.allProducts = []
+    })
+
+    builder.addCase(clearAllProductInCart.pending , (state)=>{
+      state.isError = false ;
+      state.isLoading = true ;
+    })
+
+
+    builder.addCase(clearAllProductInCart.rejected , (state)=>{
+      state.isError = true ;
+      state.isLoading = false ;
+    })
+
+
   },
 });
 

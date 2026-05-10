@@ -25,7 +25,7 @@ import Loding from './COMPONENT/LODING/Loding';
 import { Provider } from 'react-redux';
 import { reduxStore } from './COMPONENT/REDUX/ReduxStore';
 import ProtectedLoginRoute from './COMPONENT/PROTECTED-LOGIN-ROUTE/ProtectedLoginRoute';
-import ScrollToTopButton from './COMPONENT/ScrollToTopButton/ScrollToTopButton';
+// import ScrollToTopButton from './COMPONENT/ScrollToTopButton/ScrollToTopButton';
 import SubCategories from './COMPONENT/CATEGORES/SubCategories';
 
 let Wishlist = React.lazy(() => import("./COMPONENT/WISHLIST/Wishlist"));
@@ -63,7 +63,7 @@ function App() {
           children: [
             {
               path: "",
-              element: <AllProduct />
+              element: <Suspense fallback={<Loding />}> <AllProduct /> </Suspense> 
             },
 
             {
@@ -209,7 +209,7 @@ function App() {
 
               <RouterProvider router={myRouter} />
 
-              <ScrollToTopButton />
+              {/* <ScrollToTopButton /> */}
 
             </AutheContextProvider>
           </CartContextProvider>

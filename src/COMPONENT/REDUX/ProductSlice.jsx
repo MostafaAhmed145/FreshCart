@@ -1,21 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 let CategoryNameSlice = createSlice({
-
-    name : "ProductSlice" ,
-    initialState : {
-        categoryName : ["all" , "Men's Fashion" , "Women's Fashion" , "Electronics" ] ,
-        selectedCategory: "all"
-    } ,
-
-    reducers : {
-        getCategoryName : (state , actia )=>{
-            state.selectedCategory = actia.payload
-        }
+  name: "ProductSlice",
+  initialState: {
+    categoryName: ["all", "Men's Fashion", "Women's Fashion", "Electronics"],
+    selectedCategory: "all"
+  },
+  reducers: {
+    getCategoryName: (state, action) => {
+      state.selectedCategory = action.payload;
     }
+  }
+});
 
-})
+export let { getCategoryName } = CategoryNameSlice.actions;
 
-export let { getCategoryName } = CategoryNameSlice.actions
-
-export default CategoryNameSlice.reducer
+export default CategoryNameSlice.reducer;
