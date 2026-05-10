@@ -1,16 +1,12 @@
 
-
-
-
-import axios from 'axios';
+// import axios from 'axios';
 import React from 'react'
 import Slider from "react-slick";
 import Loding from '../LODING/Loding';
-import { useQuery } from 'react-query';
+// import { useQuery } from 'react-query';
 
 
 function SlyderProduct() {
-
 
         var settings = {
             dots: true,
@@ -45,7 +41,7 @@ function SlyderProduct() {
                         <figcaption className=' absolute p-5 font-bold  top-2'>
                             <h2 className=' capitalize font-serif text-green-500'>Freshly baked buns</h2>
                             <p className=' text-slate-400 font-serif'>get upto 25% off</p>
-                            <button className=' p-1 mt-2 rounded-lg text-white bg-slate-700 font-serif font-normal transition-all duration-300 hover:bg-green-600'>shop now</button>
+                            <button className=' p-1 mt-2 rounded-lg text-white bg-slate-700 font-serif font-normal transition-all duration-300 hover:bg-blue-600'>shop now</button>
                         </figcaption>
                         </figure>
                         <div>
@@ -54,7 +50,7 @@ function SlyderProduct() {
                                 <figcaption className=' absolute p-5 font-bold  top-2'>
                             <h2 className=' capitalize font-serif text-green-500'>Fruits $ vegetables</h2>
                             <p className=' text-slate-400 font-serif'>get upto 30% off</p>
-                            <button className=' p-1 mt-2 rounded-lg text-white bg-slate-700 font-serif font-normal transition-colors duration-300 hover:bg-green-600'>shop now</button>
+                            <button className=' p-1 mt-2 rounded-lg text-white bg-slate-700 font-serif font-normal transition-colors duration-300 hover:bg-blue-600'>shop now</button>
                         </figcaption>
                             </figure>
                         </div>

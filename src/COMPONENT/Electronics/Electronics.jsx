@@ -1,8 +1,4 @@
 
-
-
-
-
 import axios from 'axios'
 import React, { useContext } from 'react'
 import { useQuery } from 'react-query'
@@ -66,13 +62,7 @@ function Electronics() {
     return (
         <>
 
-           
-            
-
-
-           
-
-     
+ 
                 <div className="content p-10 pb-6 rounded-2xl">
                     <div  className=" grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4">
                         {data.data.data.length > 0 ? (

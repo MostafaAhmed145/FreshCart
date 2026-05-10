@@ -41,9 +41,11 @@ function Payment() {
                         setIsLoding(false)
                     }
                 } ).catch( (err)=>{
-                    console.log(err);
-                    
+                    // console.log(err , cartId);
+                    toast.error("Request failed" , {duration : 3000})
                 } )
+
+                setIsLoding(false)
             }
 
 
@@ -125,7 +127,7 @@ function Payment() {
                                 strokeColor = "blue"
                                 wrapperStyle={{}}
                                 wrapperClass=""
-                                /> : "Enter the password recovery link"}
+                                /> : "Pay Now"}
                 
             </button>            </form>
         </div>

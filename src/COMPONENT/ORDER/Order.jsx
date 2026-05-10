@@ -3,6 +3,11 @@ import React, { useContext, useState } from 'react'
 import { useQuery } from 'react-query'
 import Loding from '../LODING/Loding'
 import jwt_decode, { jwtDecode } from 'jwt-decode';
+// import React, { useState } from 'react'
+import { useQuery } from 'react-query'
+import Loding from '../LODING/Loding'
+import jwt_decode, { jwtDecode } from 'jwt-decode';
+import ErrorPage from '../ERROR-PAGE/ErrorPage';
 
 
 
@@ -21,12 +26,17 @@ let getUserId = jwtDecode(localStorage.getItem("tkn"))
 
   let { data,  isLoading } = useQuery("getAllOrders", getAllOrders)
 
+
   
   
   
   
   if (isLoading) {
     return <Loding />
+  }
+
+  if (isError) {
+    return <ErrorPage/>
   }
 
   return <>
@@ -97,8 +107,9 @@ let getUserId = jwtDecode(localStorage.getItem("tkn"))
             {/* Pricing Information */}
             <div className="pricing p-4 bg-gray-50 ">
                 <h4 className=' border text-center rounded-md py-1'>payment Method : { order.paymentMethodType === "card" ?   <i class="fa-solid fa-money-check-dollar"></i> : order.paymentMethodType } </h4>
-              <h4 className="text-gray-600">Tax Price : <span className="font-bold text-blue-600">{ order.taxPrice == 0 ? "free" : <p>{ order.taxPrice} EGP </p>  } </span></h4>
-              <h4 className="text-gray-600">Shipping Price : <span className="font-bold text-blue-600">{order.shippingPrice == 0 ? "free" : <p>{ order.shippingPrice} EGP </p> } </span></h4>
+
+              <h4 className="text-gray-600">Tax Price : <span className="font-bold text-blue-600">{ order.taxPrice === 0 ? "free" : <p>{ order.taxPrice} EGP </p>  } </span></h4>
+              <h4 className="text-gray-600">Shipping Price : <span className="font-bold text-blue-600">{order.shippingPrice === 0 ? "free" : <p>{ order.shippingPrice} EGP </p> } </span></h4>
               <h3 className="text-xl font-semibold text-gray-800">Total Price : <span className="text-green-500">{order.totalOrderPrice} EGP</span></h3>
             </div>
           </div>

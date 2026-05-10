@@ -1,26 +1,30 @@
-
-import React from 'react'
-import { RotatingLines } from 'react-loader-spinner'
-import LodingCss from "./Loding.module.css"
+import React from "react";
+import { RotatingLines } from "react-loader-spinner";
 
 function Loding() {
-    return <>
-    
-    <div className={ LodingCss.loding + " relative top-0 bottom-0 left-0 right-0 bg-black flex justify-center items-center"}>
-        <RotatingLines
-            visible={true}
-            height="96"
-            width="96"
-            color="grey"
-            strokeWidth="5"
-            animationDuration="0.75"
-            ariaLabel="rotating-lines-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-        />
+  return (
+    <div
+      className="
+        fixed
+        inset-0
+        bg-black/60
+        flex
+        justify-center
+        items-center
+        z-50
+      "
+    >
+      <RotatingLines
+        visible={true}
+        height="80"
+        width="80"
+        color="white"
+        strokeWidth="5"
+        animationDuration="0.75"
+        ariaLabel="rotating-lines-loading"
+      />
     </div>
-    
-    </>
+  );
 }
 
-export default Loding
+export default Loding;

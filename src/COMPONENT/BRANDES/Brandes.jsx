@@ -9,6 +9,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import Aos from 'aos'
 import "aos/dist/aos.css"
 import { Helmet } from 'react-helmet';
+import ErrorPage from '../ERROR-PAGE/ErrorPage';
 
 function Brandes() {
 
@@ -25,6 +26,10 @@ function Brandes() {
 
     if (isLoading) {
         return <Loding/>
+    }
+
+    if(isError){
+        return <ErrorPage/>
     }
 
     return <>

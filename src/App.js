@@ -1,5 +1,4 @@
-
-import {  createHashRouter, RouterProvider } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 import LayOut from './COMPONENT/LAYOUT/LayOut';
 import Login from './COMPONENT/LOGIN/Login';
@@ -23,84 +22,209 @@ import { Offline } from 'react-detect-offline';
 import { Helmet } from 'react-helmet';
 import React, { Suspense } from 'react';
 import Loding from './COMPONENT/LODING/Loding';
+import { Provider } from 'react-redux';
+import { reduxStore } from './COMPONENT/REDUX/ReduxStore';
+import ProtectedLoginRoute from './COMPONENT/PROTECTED-LOGIN-ROUTE/ProtectedLoginRoute';
+import ScrollToTopButton from './COMPONENT/ScrollToTopButton/ScrollToTopButton';
+import SubCategories from './COMPONENT/CATEGORES/SubCategories';
 
-let Wishlist = React.lazy( ()=> import ("./COMPONENT/WISHLIST/Wishlist") )
-let AllProduct = React.lazy( ()=> import ("./COMPONENT/PRODUCT/Product") )
-let MensFashion = React.lazy( ()=> import ("./COMPONENT/Men'sFashion/MensFashion") )
-let WomensFashion = React.lazy( ()=> import ("./COMPONENT/Women's Fashion/WomensFashion") )
-let Electronics = React.lazy( ()=> import ("./COMPONENT/Electronics/Electronics") )
-let Brandes = React.lazy( ()=> import ("./COMPONENT/BRANDES/Brandes") )
-let Categores = React.lazy( ()=> import ("./COMPONENT/CATEGORES/Categores") )
-let ProductDitelse = React.lazy( ()=> import ("./COMPONENT/PRODUCT-DITELSE/ProductDitelse") )
-
-
-
-
+let Wishlist = React.lazy(() => import("./COMPONENT/WISHLIST/Wishlist"));
+let AllProduct = React.lazy(() => import("./COMPONENT/PRODUCT/Product"));
+let Brandes = React.lazy(() => import("./COMPONENT/BRANDES/Brandes"));
+let Categores = React.lazy(() => import("./COMPONENT/CATEGORES/Categores"));
+let ProductDitelse = React.lazy(() => import("./COMPONENT/PRODUCT-DITELSE/ProductDitelse"));
 
 function App() {
 
-  let myRouter =  createHashRouter( [
-    { element : <LayOut/> , children : [
-    {path : "/" , element : <Login/> },
-    {path : "FreshCart" , element : <Login/> },
+  let myRouter = createHashRouter([
+    {
+      element: <LayOut />,
+      children: [
 
-    {path : "Home" , element : <Home/>, children : [
-      { path : "" , element : <AllProduct/> },
-      { path : "AllProduct" , element :<Suspense fallback={ <Loding/> }> <AllProduct/> </Suspense>  },
-      { path : "MensFashion" , element : <Suspense fallback={<Loding/>}> <MensFashion/> </Suspense>  },
-      { path : "WomensFashion" , element : <Suspense fallback={<Loding/>}> <WomensFashion/> </Suspense>  },
-      { path : "Electronics" , element : <Suspense fallback={<Loding/>}> <Electronics/> </Suspense>   },
+        {
+          path: "/",
+          element:
+            <ProtectedLoginRoute>
+              <Login />
+            </ProtectedLoginRoute>
+        },
 
+        {
+          path: "FreshCart",
+          element:
+            <ProtectedLoginRoute>
+              <Login />
+            </ProtectedLoginRoute>
+        },
 
-    ]  },
-    {path : "ProductDitelse/:id" , element : <Suspense fallback={<Loding/>}> <ProductDitelse/>  </Suspense>    },
-    {path : "Categores" , element : <Suspense fallback={<Loding/>}> <Categores/> </Suspense>  },
-    {path : "Brandes" , element : <Suspense fallback={<Loding/>}> <Brandes/> </Suspense>   },
-    {path : "Cart" , element : <ProtectedRouteProvider> <Cart/> </ProtectedRouteProvider>  },
-    {path : "Wishlist" , element : <ProtectedRouteProvider> <Suspense fallback={<Loding/>}><Wishlist/></Suspense>  </ProtectedRouteProvider> },
-    {path : "Register" , element : <Register/> },
-    {path : "Login" , element : <Login/> },
-    {path : "PasswordReset" , element : <PasswordReset/> , children : [
-      { path : "" , element : <ForgitPasswor/> },
-      { path : "ForgitPasswor" , element : <ForgitPasswor/> },
-      { path :  "UpdatePassword" , element : <UpdatePassword/> },
-      { path :  "VerifyResetCode" , element : <VerifyResetCode/> },
-    ] },
-    {path : "Payment" , element : <Payment/> },
-    {path : "CheckoutPage" , element : <ProtectedRouteProvider> <CheckoutPage/> </ProtectedRouteProvider> },
-    {path : "allorders" , element : <ProtectedRouteProvider> <Order/> </ProtectedRouteProvider> },
+        {
+          path: "Home",
+          element: <Home />,
+          children: [
+            {
+              path: "",
+              element: <AllProduct />
+            },
 
-    
-    {path : "*" , element : <NotFound/> },
-    
+            {
+              path: "AllProduct",
+              element:
+                <Suspense fallback={<Loding />}>
+                  <AllProduct />
+                </Suspense>
+            },
+          ]
+        },
 
-  ]}
-] )
+        {
+          path: "ProductDitelse/:id",
+          element:
+            <Suspense fallback={<Loding />}>
+              <ProductDitelse />
+            </Suspense>
+        },
 
-let myQuery = new QueryClient()
+        {
+          path: "SubCategories/:id",
+          element:
+            <Suspense fallback={<Loding />}>
+              <SubCategories />
+            </Suspense>
+        },
 
+        {
+          path: "Categores",
+          element:
+            <Suspense fallback={<Loding />}>
+              <Categores />
+            </Suspense>
+        },
 
+        {
+          path: "Brandes",
+          element:
+            <Suspense fallback={<Loding />}>
+              <Brandes />
+            </Suspense>
+        },
 
-  return <>
+        {
+          path: "Cart",
+          element:
+            <ProtectedRouteProvider>
+              <Cart />
+            </ProtectedRouteProvider>
+        },
 
-    <Helmet>
-      <title>Home</title>
-    </Helmet>
+        {
+          path: "Wishlist",
+          element:
+            <ProtectedRouteProvider>
+              <Suspense fallback={<Loding />}>
+                <Wishlist />
+              </Suspense>
+            </ProtectedRouteProvider>
+        },
 
+        {
+          path: "Register",
+          element: <Register />
+        },
 
-  <QueryClientProvider client={myQuery}>
-    <CartContextProvider>
-    <AutheContextProvider>
-      <RouterProvider router={ myRouter}/>
-    </AutheContextProvider>
-    </CartContextProvider>
-  </QueryClientProvider>
-  <Toaster/>
-  <Offline>
-  <p className=' p-2 shadow-md fixed bottom-1 left-1 bg-red-500 text-white rounded-md'>No internet connection! Please check your connection.</p>
-  </Offline>
+        {
+          path: "Login",
+          element: <Login />
+        },
 
-  </>
+        {
+          path: "PasswordReset",
+          element: <PasswordReset />,
+          children: [
+
+            {
+              path: "",
+              element: <ForgitPasswor />
+            },
+
+            {
+              path: "ForgitPasswor",
+              element: <ForgitPasswor />
+            },
+
+            {
+              path: "UpdatePassword",
+              element: <UpdatePassword />
+            },
+
+            {
+              path: "VerifyResetCode",
+              element: <VerifyResetCode />
+            },
+
+          ]
+        },
+
+        {
+          path: "Payment",
+          element: <Payment />
+        },
+
+        {
+          path: "CheckoutPage",
+          element:
+            <ProtectedRouteProvider>
+              <CheckoutPage />
+            </ProtectedRouteProvider>
+        },
+
+        {
+          path: "allorders",
+          element:
+            <ProtectedRouteProvider>
+              <Order />
+            </ProtectedRouteProvider>
+        },
+
+        {
+          path: "*",
+          element: <NotFound />
+        },
+
+      ]
+    }
+  ]);
+
+  let myQuery = new QueryClient();
+
+  return (
+    <>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
+
+      <QueryClientProvider client={myQuery}>
+        <Provider store={reduxStore}>
+          <CartContextProvider>
+            <AutheContextProvider>
+
+              <RouterProvider router={myRouter} />
+
+              <ScrollToTopButton />
+
+            </AutheContextProvider>
+          </CartContextProvider>
+        </Provider>
+      </QueryClientProvider>
+
+      <Toaster />
+
+      <Offline>
+        <p className='p-2 shadow-md fixed bottom-1 left-1 bg-red-500 text-white rounded-md'>
+          No internet connection! Please check your connection.
+        </p>
+      </Offline>
+    </>
+  );
 }
 
 export default App;

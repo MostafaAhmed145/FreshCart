@@ -19,11 +19,13 @@ import { cartContext } from '../CART-CONTEXT/CartContext'
 
 function Login() {
 
-  let { myToken , setMyToken } = useContext( myContext )
+
+  // let { myToken , setMyToken } = useContext( myContext )
   const [isLoding, setisLoding] = useState(false)
   let [ isError , setIsError] = useState( false )
   let [ isSucces , setIsSucces ] = useState()
   let { userId , setUserId  } = useContext( cartContext )
+  // let { userId , setUserId  } = useContext( cartContext )
 
 
 
@@ -31,8 +33,7 @@ function Login() {
           Aos.init({ easing: 'ease-in-out', duration : 1500})
   } , [])
 
-  
-  let token = ""
+  en = ""
 
 
   let myNavigate = useNavigate()
@@ -57,8 +58,6 @@ function Login() {
       setIsSucces(res.data.message)
             if ( res.data.token ) {
               localStorage.setItem("tkn", res.data.token);
-
-
               
             } else {
               toast.error("We're sorry, but something went wrong. Please try again shortly")
