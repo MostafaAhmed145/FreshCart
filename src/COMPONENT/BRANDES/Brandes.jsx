@@ -38,19 +38,19 @@ function Brandes() {
         <title>Brandes</title>
       </Helmet>
 
-      <div className="container p-10 my-20 m-auto">
+      <div className="container p-10 my-20 m-auto ">
         <div className="row grid lg:grid-cols-5 md:grid-cols-2 sm:grid-cols-1 text-center gap-4">
 
           {data?.data?.data?.length > 0 ? (
             data.data.data.map((brand, index) => (
               <div
-                className='drop-shadow-xl rounded-lg overflow-hidden'
+                className='drop-shadow-xl  rounded-lg overflow-hidden group p-1 border '
                 key={index}
               >
-                <div className="card">
+                <div className="card " data-aos="flip-left">
                   <figure>
                     <LazyLoadImage
-                      className='w-full border transition duration-300 hover:scale-[1.1]'
+                      className='w-full aspect-square rounded-full border border-blue-500 transition duration-300 group-hover:scale-[1.05]'
                       src={brand.image}
                       alt={brand.name}
                       effect="opacity"

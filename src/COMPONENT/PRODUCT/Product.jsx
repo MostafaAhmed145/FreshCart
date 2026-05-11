@@ -14,6 +14,8 @@ import Loding from '../LODING/Loding'
 import ErrorPage from '../ERROR-PAGE/ErrorPage'
 
 import { addProductToCart, addProductInWishList } from '../REDUX/CartSlice'
+import Aos from 'aos'
+import "aos/dist/aos.css"
 
 function AllProduct() {
 
@@ -30,7 +32,9 @@ function AllProduct() {
     useEffect(() => {
         const storedFavorites =
             JSON.parse(localStorage.getItem("wishlist")) || []
-
+            Aos.init({
+                duration : 1000
+            })
         setFavorites(storedFavorites)
     }, [])
 
@@ -115,6 +119,7 @@ function AllProduct() {
 
                         <div
                             key={inx}
+                            data-aos="flip-left"
                             className="overflow-hidden card border hover:border-blue-600 p-2 pb-5 text-center relative shadow-lg hover:shadow-2xl transition-all duration-350 rounded-lg hover:scale-[1.02]"
                         >
 

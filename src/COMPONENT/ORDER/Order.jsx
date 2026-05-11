@@ -43,7 +43,7 @@ function Order() {
         <div className='grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-6'>
 
           {data?.data?.map((order, idx) => (
-            <div key={idx} className='bg-white shadow-lg rounded-lg overflow-hidden border border-blue-500'>
+            <div key={idx} className='bg-white shadow-2xl rounded-2xl overflow-hidden border border-gray-200 hover:scale-[1.01] transition-all duration-300'>
 
               {/* user info */}
               <h3 className='bg-gray-100 p-2 text-stone-500'>User Information :</h3>

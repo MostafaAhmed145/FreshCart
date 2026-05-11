@@ -1,5 +1,4 @@
-import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, {  useEffect } from 'react';
 import Loding from '../LODING/Loding';
 import { Link } from 'react-router-dom';
 import Aos from 'aos';
@@ -7,6 +6,7 @@ import "aos/dist/aos.css";
 import { Helmet } from 'react-helmet';
 import { clearAllProductInCart, getCart, removeCart, updateCart } from '../REDUX/CartSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import ErrorPage from '../ERROR-PAGE/ErrorPage';
 
 function Cart() {
 
@@ -15,8 +15,9 @@ function Cart() {
   const totalCartPryse = useSelector((state) => state.cartSlice.totalCartPrice)
   const allProducts = useSelector((state) => state.cartSlice.allProducts)
   const isLoading = useSelector((state) => state.cartSlice.isLoading)
+  const isError = useSelector((state) => state.cartSlice.isError)
   
-  console.log("this.state.first" , totalCartPryse , allProducts);
+  // console.log("this.state.first" , totalCartPryse , allProducts);
   
   
 
@@ -26,7 +27,7 @@ function Cart() {
 
   useEffect(() => {
     dispatch(getCart())
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     Aos.init({ easing: 'ease-in-out', duration: 1500 });
@@ -35,6 +36,11 @@ function Cart() {
   // loading
   if (isLoading) {
     return <Loding />;
+  }
+
+  
+  if(isError) {
+    return <ErrorPage/>
   }
 
  
@@ -79,8 +85,8 @@ function Cart() {
                     <img
                       data-aos="zoom-in"
                       className="w-full h-auto shadow-lg rounded-lg object-cover"
-                      src={product.product.imageCover}
-                      alt={product.product.title}
+                      src={product?.product?.imageCover}
+                      alt={product?.product?.title}
                     />
                   </figure>
 
@@ -88,15 +94,15 @@ function Cart() {
                   <figcaption className="flex flex-col justify-center items-center m-auto space-y-4">
                     <div className="text-center">
                       <h2 className="text-xl font-semibold text-gray-800">
-                        {product.product.title}
+                        {product?.product?.title}
                       </h2>
 
                       <h3 className="text-lg text-gray-600">
-                        {product.product.category.name ? product.product.category.name  : ""}
+                        {product.product.category?.name ? product.product.category?.name  : ""}
                       </h3>
 
                       <p className="text-md font-bold text-gray-700">
-                        Price : {product.price} EGB
+                        Price : {product?.price} EGB
                       </p>
 
                       <p className="text-md font-bold text-xl text-cyan-600">
@@ -143,12 +149,17 @@ function Cart() {
                 </div>
               ))}
 
-              <div className="flex justify-between items-center py-4 shadow-lg p-3 mt-5 border">
-                <h3>Total Price :</h3>
-                <h4 className="text-xl text-green-500 font-bold">
-                  {totalCartPryse} EGB
-                </h4>
-              </div>
+              <div className="flex justify-between items-center py-5 px-6 shadow-xl rounded-2xl mt-6 border bg-white">
+  
+  <h3 className="text-2xl font-semibold text-gray-700">
+    Total Price :
+  </h3>
+
+  <h4 className="text-3xl font-bold text-green-500">
+    {totalCartPryse} EGP
+  </h4>
+
+</div>
 
               <div className='grid lg:grid-cols-2 md:grid-cols-1 gap-2 mt-2'>
                 <Link
