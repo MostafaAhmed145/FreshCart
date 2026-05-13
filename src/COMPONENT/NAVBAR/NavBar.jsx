@@ -28,7 +28,7 @@ function NavBar() {
 
           {/* Mobile Button */}
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-white  focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
               <span className="sr-only">Open main menu</span>
               <Bars3Icon className="block size-6 group-data-[open]:hidden" />
               <XMarkIcon className="hidden size-6 group-data-[open]:block" />
@@ -109,27 +109,27 @@ function NavBar() {
 
           <div className="space-y-4 px-2 pt-2 pb-3">
 
-            <NavLink to="/Home" className="text-white block px-3 py-2 rounded-md hover:bg-green-600">
+            <NavLink to="/Home" className="text-white block px-3 py-2 rounded-md hover:bg-blue-600">
               <i className="fa-solid fa-house"></i> Home
             </NavLink>
 
-            <NavLink to="/Categores" className="text-white block px-3 py-2 rounded-md hover:bg-green-600">
+            <NavLink to="/Categores" className="text-white block px-3 py-2 rounded-md hover:bg-blue-600">
               <i className="fa-solid fa-layer-group"></i> Categories
             </NavLink>
 
-            <NavLink to="/Brandes" className="text-white block px-3 py-2 rounded-md hover:bg-green-600">
+            <NavLink to="/Brandes" className="text-white block px-3 py-2 rounded-md hover:bg-blue-600">
               <i className="fa-brands fa-bandcamp"></i> Brands
             </NavLink>
 
-            <NavLink to="/Cart" className="text-white block px-3 py-2 rounded-md hover:bg-green-600">
+            <NavLink to="/Cart" className="text-white block px-3 py-2 rounded-md hover:bg-blue-600">
               <i className="fa-solid fa-cart-arrow-down"></i> Cart
             </NavLink>
 
-            <NavLink to="/Wishlist" className="text-white block px-3 py-2 rounded-md hover:bg-green-600">
+            <NavLink to="/Wishlist" className="text-white block px-3 py-2 rounded-md hover:bg-blue-600">
               <i className="fas fa-heart"></i> Wishlist
             </NavLink>
 
-            <NavLink to="/allOrders" className="text-white block px-3 py-2 rounded-md hover:bg-green-600">
+            <NavLink to="/allOrders" className="text-white block px-3 py-2 rounded-md hover:bg-blue-600">
               <i className="fas fa-box"></i> All Orders
             </NavLink>
 

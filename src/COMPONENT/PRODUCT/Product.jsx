@@ -3,19 +3,16 @@ import React, { useState, useEffect } from 'react'
 import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
-
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
-
 import Loding from '../LODING/Loding'
 import ErrorPage from '../ERROR-PAGE/ErrorPage'
-
-import { addProductToCart, addProductInWishList } from '../REDUX/CartSlice'
+import { addProductToCart, addProductInWishList, removeProductFromWishList } from '../REDUX/CartSlice'
 import Aos from 'aos'
 import "aos/dist/aos.css"
+
 
 function AllProduct() {
 
@@ -79,7 +76,7 @@ function AllProduct() {
         if (favorites.includes(productId)) {
             updatedFavorites = favorites.filter(id => id !== productId)
         } else {
-            updatedFavorites = [...favorites, productId]
+            updatedFavorites = [...favorites , productId ]
         }
 
         setFavorites(updatedFavorites)
@@ -223,10 +220,13 @@ function AllProduct() {
 
                                         toggleFavorite(product.id)
 
-                                        dispatch(
-                                            addProductInWishList(product.id)
-                                        )
+                                        if (!favorites.includes(product.id)) {
+                                             dispatch( addProductInWishList(product.id) )
+                                        }else{
+                                            dispatch(removeProductFromWishList(product.id))
+                                        }
                                     }}
+                                    
 
                                     className={`absolute bottom-2 right-2 fa-solid fa-heart cursor-pointer text-2xl transition-colors duration-300 ${favorites.includes(product.id)
                                             ? 'text-red-500'

@@ -41,40 +41,132 @@ function Order() {
       <div className="container py-20 m-auto px-6">
 
         <div className='grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-6'>
-
-          {data?.data?.map((order, idx) => (
+             {data?.data.length  === 0 ? <p className='shadow-lg text-black mt-11 p-6 border'>No orders found
+              </p> : <>
+             
+             {data?.data?.map((order, idx) => (
             <div key={idx} className='bg-white shadow-2xl rounded-2xl overflow-hidden border border-gray-200 hover:scale-[1.01] transition-all duration-300'>
 
+
               {/* user info */}
-              <h3 className='bg-gray-100 p-2 text-stone-500'>User Information :</h3>
+<div className="p-5 rounded-2xl border border-gray-200 mt-4 w-[95%] m-auto bg-white shadow-sm">
 
-              <div className="p-4 border-b-2">
-                <h2 className="font-bold text-lg text-green-500">
-                  Name: {order.user.name}
-                </h2>
-                <h3 className="text-sm text-gray-600">
-                  Email: {order.user.email}
-                </h3>
-                <h3 className="text-sm text-gray-600">
-                  Phone: {order.user.phone}
-                </h3>
-              </div>
+  {/* title */}
+  <div className="border-b pb-3 mb-4">
+    <h2 className="text-lg font-bold text-gray-800">
+      Customer Information
+    </h2>
+  </div>
 
-              {/* shipping */}
-              <h3 className='bg-gray-100 p-2 text-stone-500'>Shipping Information :</h3>
+  {/* content */}
+  <div className="flex flex-col gap-3">
 
-              <div className="p-4 border-b-2">
-                <h4>City: {order.shippingAddress?.city}</h4>
-                <h4>Phone: {order.shippingAddress?.phone}</h4>
-                <h4>Details: {order.shippingAddress?.details}</h4>
-              </div>
+    {/* name */}
+    <div className="flex justify-between items-center bg-green-50 border border-green-200 p-3 rounded-xl">
+
+      <span className="font-medium text-gray-700">
+        Name
+      </span>
+
+      <span className="font-bold text-green-600">
+        {order.user.name}
+      </span>
+
+    </div>
+
+    {/* email */}
+    <div className="flex justify-between items-center bg-gray-100 p-3 rounded-xl">
+
+      <span className="font-medium text-gray-700">
+        Email
+      </span>
+
+      <span className="text-gray-800 font-semibold break-all">
+        {order.user.email}
+      </span>
+
+    </div>
+
+    {/* phone */}
+    <div className="flex justify-between items-center bg-gray-100 p-3 rounded-xl">
+
+      <span className="font-medium text-gray-700">
+        Phone
+      </span>
+
+      <span className="text-gray-800 font-semibold">
+        {order.user.phone}
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+            {/* shipping */}
+<div className="p-5 rounded-2xl border border-gray-200 mt-3 mb-1 w-[95%] m-auto bg-white shadow-sm">
+
+  {/* title */}
+  <div className="border-b pb-3 mb-4">
+    <h3 className='text-lg font-bold text-gray-800'>
+      Shipping Information
+    </h3>
+  </div>
+
+  {/* content */}
+  <div className="flex flex-col gap-3">
+
+    {/* city */}
+    <div className="flex justify-between items-center bg-gray-100 p-3 rounded-xl">
+
+      <span className="font-medium text-gray-700">
+        City
+      </span>
+
+      <span className="font-semibold text-gray-800">
+        {order.shippingAddress?.city}
+      </span>
+
+    </div>
+
+    {/* phone */}
+    <div className="flex justify-between items-center bg-gray-100 p-3 rounded-xl">
+
+      <span className="font-medium text-gray-700">
+        Phone
+      </span>
+
+      <span className="font-semibold text-gray-800">
+        {order.shippingAddress?.phone}
+      </span>
+
+    </div>
+
+    {/* details */}
+    <div className="bg-gray-100 p-3 rounded-xl">
+
+      <h4 className="font-medium text-gray-700 mb-2">
+        Details
+      </h4>
+
+      <p className="text-gray-800 leading-relaxed">
+        {order.shippingAddress?.details}
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
 
               {/* products */}
-              <h3 className='bg-gray-100 p-2 text-stone-500'>Product Information :</h3>
+              <div className='w-[95%] m-auto border mt-3 rounded-xl'>
+                <h3 className=' p-2'>Product </h3>
 
-              <table className="w-full text-center border-collapse">
+              <table className="w-full text-center ">
                 <thead>
-                  <tr className="bg-gray-100">
+                  <tr className="bg-gray-100 border">
                     <th className="p-4">Img</th>
                     <th className="p-4">Title</th>
                     <th className="p-4">Price</th>
@@ -82,8 +174,8 @@ function Order() {
                 </thead>
 
                 <tbody>
-                  {order.cartItems.map((product, index) => (
-                    <tr key={index} className="border">
+                  {order?.cartItems?.map((product, index) => (
+                    <tr key={index} >
                       <td className="p-4 flex justify-center">
                         <img
                           className="w-24 h-24 object-cover rounded-lg"
@@ -103,30 +195,71 @@ function Order() {
                   ))}
                 </tbody>
               </table>
+              </div>
 
-              {/* payment */}
-              <div className="p-4 bg-gray-50">
+                          {/* payment */}
+            <div className="p-5 rounded-2xl border border-gray-200 mt-3 mb-1 w-[95%] m-auto flex flex-col gap-3 bg-white shadow-sm">
 
-                <h4 className='text-center border rounded-md py-1'>
-                  Payment Method: {order.paymentMethodType}
+              {/* payment method */}
+              <div className='border-b pb-3 flex justify-between items-center'>
+
+                <h4 className='font-semibold text-gray-700'>
+                  Payment Method
                 </h4>
 
-                <h4>
-                  Tax Price: {order.taxPrice === 0 ? "Free" : `${order.taxPrice} EGP`}
+                <h5 className='bg-indigo-500 text-white py-1 px-3 rounded-full text-sm'>
+                  {order.paymentMethodType}
+                </h5>
+
+              </div>
+
+              {/* tax */}
+              <div className='flex justify-between items-center p-3 rounded-xl bg-gray-100'>
+
+                <h4 className='text-gray-700 font-medium'>
+                  Tax Price
                 </h4>
 
-                <h4>
-                  Shipping Price: {order.shippingPrice === 0 ? "Free" : `${order.shippingPrice} EGP`}
+                <h5 className='font-semibold text-gray-800'>
+                  {order.taxPrice === 0 ? "Free" : `${order.taxPrice} EGP`}
+                </h5>
+
+              </div>
+
+              {/* shipping */}
+              <div className='flex justify-between items-center p-3 rounded-xl bg-gray-100'>
+
+                <h4 className='text-gray-700 font-medium'>
+                  Shipping Price
                 </h4>
 
-                <h3 className="text-xl font-semibold">
-                  Total Price: <span className="text-green-500">{order.totalOrderPrice} EGP</span>
+                <h5 className='font-semibold text-gray-800'>
+                  {order.shippingPrice === 0 ? "Free" : `${order.shippingPrice} EGP`}
+                </h5>
+
+              </div>
+
+              {/* total */}
+              <div className='mt-2 bg-green-50 border border-green-200 rounded-xl p-4 flex justify-between items-center'>
+
+                <h3 className="text-lg font-bold text-gray-800">
+                  Total Price
                 </h3>
+
+                <span className="text-2xl font-bold text-blue-600">
+                  {order.totalOrderPrice} EGP
+                </span>
 
               </div>
 
             </div>
+
+
+            </div>
           ))}
+             
+             </>}
+          
 
         </div>
       </div>

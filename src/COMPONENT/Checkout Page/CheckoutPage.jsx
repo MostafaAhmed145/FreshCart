@@ -2,17 +2,16 @@
 
 import axios from 'axios';
 import { useFormik } from 'formik';
-import React, { useContext } from 'react'
-import { cartContext } from '../CART-CONTEXT/CartContext';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function CheckoutPage() {
 
     let myNavigate = useNavigate()
 
 
-        let { cartId ,  setCartId  } = useContext( cartContext )
+        const cartId = useSelector((state)=> state.cartSlice.cartId)
 
 
 

@@ -2,16 +2,19 @@
 
 import axios from 'axios'
 import React, { useContext, useState } from 'react'
-import { cartContext } from '../CART-CONTEXT/CartContext'
+// import { cartContext } from '../CART-CONTEXT/CartContext'
 import { useFormik } from 'formik'
 import toast from 'react-hot-toast'
 import { RotatingLines } from 'react-loader-spinner'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 function Payment() {
 
 
-          let { cartId ,  setCartId  } = useContext( cartContext )
+          const cartId = useSelector((state)=>{
+            return state.cartSlice.cartId
+          })
           let [isLoding , setIsLoding] = useState(false)
           let myNavigate = useNavigate()
     

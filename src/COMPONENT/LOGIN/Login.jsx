@@ -1,12 +1,11 @@
 
 
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, {  useEffect, useRef, useState } from 'react'
 
 
 import { RotatingLines } from 'react-loader-spinner'
 import {  useFormik } from 'formik'
 import axios from 'axios'
-import { myContext } from '../AUTH-CONTXT/AutheContext'
 import LoginCss from "./Login.module.css"
 import { Link, useNavigate } from 'react-router-dom'
 import imgLogo from "../IMAGES/freshcart-logo.svg";
@@ -14,16 +13,12 @@ import jwt_decode, { jwtDecode } from 'jwt-decode';
 import Aos from 'aos'
 import "aos/dist/aos.css"
 import toast from 'react-hot-toast'
-import { cartContext } from '../CART-CONTEXT/CartContext'
 
 
 function Login() {
 
 
-  // let { myToken , setMyToken } = useContext( myContext )
   const [isLoding, setisLoding] = useState(false)
-  let [ isError , setIsError] = useState( false )
-  let [ isSucces , setIsSucces ] = useState()
 
 
 
@@ -52,7 +47,6 @@ function Login() {
     await axios.post("https://ecommerce.routemisr.com/api/v1/auth/signin" , values )
     .then( (res)=>{
       setisLoding(false)
-      setIsSucces(res.data.message)
             if ( res.data.token ) {
               localStorage.setItem("tkn", res.data.token);
               
@@ -64,14 +58,14 @@ function Login() {
             setTimeout(() => {
               myNavigate("/Home")
             }, 500);
+                      toast.success("Login Successfully ." , {duration : 3000})
             
       } ).catch( (err)=>{
-        setIsError(err.response.data.message)
         setisLoding(false)
 
-        setTimeout(() => {
-          setIsError(false)
-          }, 3000);
+
+
+                    toast.error(err.response?.data?.message || "Error occurred" , {duration : 3000})
           
       } )
 
@@ -125,8 +119,6 @@ function Login() {
 <div className=' bg-gray-100 min-h-screen flex justify-center items-center'>
   
 <form  onSubmit={myFormik.handleSubmit}  className={ LoginCss.myForm + ' mt-24 mb-10 drop-shadow-lg w-[80%] bg-white m-auto p-8 rounded-lg border' }>
-              {isSucces  ? <p className=' bg-sky-700 text-white p-7  m-auto rounded-2xl font-bold text-center'>login successful! You have successfully registered on the website.</p> : ""}
-              {isError  ? <p className=' bg-red-700 text-white p-7 w-[75%] m-auto rounded-2xl font-bold text-center'>{isError} </p> : ""}
 
       <div className={LoginCss.allInput + " space-y-12 container m-auto "}>
 

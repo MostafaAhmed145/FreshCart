@@ -7,10 +7,9 @@ import { RotatingLines } from "react-loader-spinner";
 import imgLogo from "../IMAGES/freshcart-logo.svg";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import toast from "react-hot-toast";
 
 function Register() {
-  const [isSucces, setIsSucces] = useState("");
-  const [isError, setIsError] = useState("");
   const [isLoding, setIsLoding] = useState(false);
 
   const navigate = useNavigate();
@@ -34,18 +33,18 @@ function Register() {
       );
 
       setIsLoding(false);
-      setIsSucces(res.data.message);
 
       setTimeout(() => {
         navigate("/Login");
       }, 500);
+          toast.success("Registration Successfully ." , {duration : 3000})
+
     } catch (err) {
       setIsLoding(false);
-      setIsError(err.response?.data?.message || "Error occurred");
 
-      setTimeout(() => {
-        setIsError("");
-      }, 3000);
+
+          toast.error(err.response?.data?.message || "Error occurred" , {duration : 3000})
+
     }
   }
 
@@ -96,6 +95,10 @@ function Register() {
     },
   });
 
+ 
+
+
+
   return (
     <div className="bg-gray-100 min-h-screen flex justify-center items-center">
       <form
@@ -105,17 +108,7 @@ function Register() {
           " mb-10 drop-shadow-2xl w-[75%] border shadow-lg bg-white m-auto p-8 rounded-lg"
         }
       >
-        {isSucces && (
-          <p className="bg-sky-700 text-white p-7 m-auto rounded-2xl font-bold text-center">
-            Registration successful! You have successfully registered.
-          </p>
-        )}
-
-        {isError && (
-          <p className="bg-red-700 text-white p-7 w-[75%] m-auto rounded-2xl font-bold text-center">
-            {isError}
-          </p>
-        )}
+  
 
         <div className="mt-16 border shadow-lg p-2 rounded-lg">
           <h2 className="text-center text-blue-600 rounded-t-lg text-2xl bg-gray-100 border-t-4 p-3 border-t-blue-500">
@@ -154,7 +147,7 @@ function Register() {
                 value={formik.values.name}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className="block w-full rounded-md border p-2"
+                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"
               />
               {formik.errors.name && formik.touched.name && (
                 <p className="text-red-600">{formik.errors.name}</p>
@@ -171,7 +164,7 @@ function Register() {
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className="block w-full rounded-md border p-2"
+                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"
               />
             </div>
 
@@ -185,7 +178,7 @@ function Register() {
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className="block w-full rounded-md border p-2"
+                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"
               />
               {formik.errors.password && formik.touched.password && (
                 <p className="text-red-600">{formik.errors.password}</p>
@@ -202,7 +195,7 @@ function Register() {
                 value={formik.values.rePassword}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className="block w-full rounded-md border p-2"
+                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"
               />
               {formik.errors.rePassword && formik.touched.rePassword && (
                 <p className="text-red-600">{formik.errors.rePassword}</p>
@@ -219,7 +212,7 @@ function Register() {
                 value={formik.values.phone}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className="block w-full rounded-md border p-2"
+                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"
               />
               {formik.errors.phone && formik.touched.phone && (
                 <p className="text-red-600">{formik.errors.phone}</p>

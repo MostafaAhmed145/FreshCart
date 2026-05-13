@@ -8,7 +8,6 @@ import AutheContextProvider from './COMPONENT/AUTH-CONTXT/AutheContext';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import ForgitPasswor from './COMPONENT/FORGIT-PASSWORD/ForgitPasswor';
 import ProtectedRouteProvider from './COMPONENT/PROTECTED-ROUTE/ProtectedRoute';
-import CartContextProvider from './COMPONENT/CART-CONTEXT/CartContext';
 import { Toaster } from 'react-hot-toast';
 import VerifyResetCode from './COMPONENT/Verify Reset Code/VerifyResetCode';
 import PasswordReset from './COMPONENT/Password-Reset/PasswordReset';
@@ -204,7 +203,6 @@ function App() {
 
       <QueryClientProvider client={myQuery}>
         <Provider store={reduxStore}>
-          <CartContextProvider>
             <AutheContextProvider>
 
               <RouterProvider router={myRouter} />
@@ -212,7 +210,6 @@ function App() {
               {/* <ScrollToTopButton /> */}
 
             </AutheContextProvider>
-          </CartContextProvider>
         </Provider>
       </QueryClientProvider>
 

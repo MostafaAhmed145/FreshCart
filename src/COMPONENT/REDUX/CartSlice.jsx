@@ -128,6 +128,7 @@ const cartSlice = createSlice({
     builder.addCase(getCart.fulfilled, (state, action) => {
       state.allProducts = action.payload.data.products;
       state.totalCartPrice = action.payload.data.totalCartPrice;
+      state.cartId = action.payload.data._id
       state.isLoading = false;
       state.isError = false
     });
